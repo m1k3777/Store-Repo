@@ -2,6 +2,7 @@ package com.mvillasenor.storerrepo
 
 import android.app.Activity
 import android.app.Application
+import com.mvillasenor.storerrepo.di.ApplicationModule
 import com.mvillasenor.storerrepo.di.DaggerApplicationComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -20,6 +21,7 @@ class Application : Application(), HasActivityInjector {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         DaggerApplicationComponent.builder()
+                .applicationModule(ApplicationModule(this))
                 .build()
                 .inject(this)
     }
