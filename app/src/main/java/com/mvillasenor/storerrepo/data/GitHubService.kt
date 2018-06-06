@@ -23,7 +23,7 @@ class GitHubService {
                 .build()
 
         val response = client.newCall(request).execute()
-        gson.fromJson(response.body()?.string(), GithubUser::class.java)
+        response.body()?.source()
     }
 
     fun getRepos(username: String) = Single.fromCallable {
@@ -31,10 +31,8 @@ class GitHubService {
                 .url("https://api.github.com/users/" + username + "/repos")
                 .build()
 
-
-        val reposType = object : TypeToken<List<GithubRepo>>() {}.type
         val response = client.newCall(request).execute()
-        gson.fromJson<List<GithubRepo>>(response.body()?.string(), reposType)
+        response.body()?.source()
     }
 
 

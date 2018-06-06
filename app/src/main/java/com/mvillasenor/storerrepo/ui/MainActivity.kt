@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         query?.let {
             animator.displayedChild = 0
             userProfileViewModel?.loadUser(query)
+            userProfileViewModel?.loadRepos(query)
         }
         return false
     }
